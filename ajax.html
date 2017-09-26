@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ajax test</title>
+</head>
+
+<body>
+
+    <p id="content">
+        Text here
+    </p>
+
+</body>
+
+<script>
+    console.log("here");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            // console.log(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
+            var rno = Math.floor(Math.random() * json.length);
+
+            var doc_location = document.getElementById("content");
+            doc_location.textContent = json[rno]["quote"];
+
+        }
+    }
+    xhr.open('GET', 'https://raw.githubusercontent.com/aktsbot/freeCodeCamp/master/jsons/quotes.json', true);
+    xhr.send(null);
+
+    console.log("there");
+</script>
+
+
+</html>
